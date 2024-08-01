@@ -9,10 +9,10 @@ import com.google.gson.Gson
 
 object QuoteDataManager {
 
-    var quotes = emptyArray<Quote>()
-    var dataLoad = mutableStateOf(false)
-    var currentQuote : Quote? = null
-    var currentPage = mutableStateOf(Pages.LIST)
+    var  quotes = emptyArray<Quote>()
+    var quotesLoaded = mutableStateOf(false) // for data loaded or not
+    var currentQuote : Quote? = null //clicked quote item from list
+    var currentPage = mutableStateOf(Pages.LIST) // manage pages  from list and quotes
     fun loadQuotesFromAssetFile(context: Context) {
         val assetManager = context.assets.open("quotes.json")
         val size: Int = assetManager.available()
@@ -22,7 +22,7 @@ object QuoteDataManager {
         val json = String(bufferedReader, Charsets.UTF_8)
         val gson = Gson()
         quotes = gson.fromJson(json, Array<Quote>::class.java)
-        dataLoad.value = true
+        quotesLoaded.value = true
     }
 
     fun switchPages(quote: Quote?) {

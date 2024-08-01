@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DemoJetPack</string>
+    <string name="quotes_app">Quotes Application</string>
 </resources>

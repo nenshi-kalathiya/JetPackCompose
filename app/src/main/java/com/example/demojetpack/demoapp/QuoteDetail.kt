@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
@@ -21,14 +22,14 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.demojetpack.R
 import com.example.demojetpack.demoapp.model.Quote
 import com.example.demojetpack.demoapp.objects.QuoteDataManager
 
 @Composable
-fun DisplayItemQuotes(quote: Quote) {
-
+fun DisplayQuotesDetails(quote: Quote) {
     BackHandler() {
         QuoteDataManager.switchPages(quote)
     }
@@ -39,8 +40,8 @@ fun DisplayItemQuotes(quote: Quote) {
             .background(
                 Brush.linearGradient(
                     listOf(
-                        colorResource(id = R.color.parpal),
-                        colorResource(id = R.color.pink)
+                        colorResource(id = R.color.yellow),
+                        colorResource(id = R.color.orange )
                     )
                 )
             )
@@ -56,7 +57,7 @@ fun DisplayItemQuotes(quote: Quote) {
             elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp)
 
         ) {
-            Column(modifier = Modifier.background(colorResource(id = R.color.white))) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.background(colorResource(id = R.color.white))) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_quote),
                     alignment = Alignment.Center,
@@ -85,4 +86,15 @@ fun DisplayItemQuotes(quote: Quote) {
 
         }
     }
+}
+
+@Preview
+@Composable
+fun ShowQuoteDetail() {
+    DisplayQuotesDetails(
+        quote = Quote(
+            "Life s to short, just be yor self and enjoy It",
+            "Nenshi Kalathiya"
+        )
+    )
 }

@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
 class AMultiplePreview : ComponentActivity() {
@@ -26,22 +27,21 @@ fun MainUIDevelopment(name : String){
 }
 
 /*basic preview with phone default UI while showSystemUI is true,
-name gives identity to each ui
-show background gibes white background to show*/
+name gives identity to each ui show background gives white background to show*/
 @Preview(showBackground = true, showSystemUi = true, name = "basicUI_1")
 @Composable
 fun PreviewUIDevelopment1(){
     MainUIDevelopment("Nenshi")
 }
 
-/* height and with gives specific height and width to view */
-@Preview(showBackground = true, widthDp = 200, heightDp = 200, name = "basicUI_2")
+/* height and with gives specific height and width to preview a view */
+@Preview(showBackground = true, widthDp = 200, heightDp = 100, name = "basicUI_2")
 @Composable
 fun PreviewUIDevelopment2(){
     MainUIDevelopment("Ravi")
 }
 
-//preview while nothing you pass
+//without passing any attribute to the preview annotation
 @Preview
 @Composable
 private fun PreviewUIDevelopment3(){
@@ -49,8 +49,8 @@ private fun PreviewUIDevelopment3(){
 }
 
 //UI mode : you can select specific preview mode while run app for UI
-//pass background color in long datatype
-@Preview(name = "basicUI_4", showBackground = true, uiMode = UI_MODE_TYPE_WATCH, backgroundColor = 0x0F00FF00)
+//Pass BackgrounsColor as  long datatype with blue clolor
+@Preview(name = "basicUI_4", showBackground = true, uiMode = UI_MODE_TYPE_WATCH, backgroundColor = 0xFF0000FF )
 @Composable
 fun PreviewUIDevelopment4(){
     MainUIDevelopment("Nilesh")

@@ -1,10 +1,12 @@
-package com.example.demojetpack
+package com.example.demojetpack.SideEffectHandler
 
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -13,19 +15,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.demojetpack.Constant
 import kotlinx.coroutines.delay
 
-class GComposableSideEffectHandlers : ComponentActivity() {
+class HComposableSideEffectHandlers : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            ListComposable()
-//            Countclick()
-            LaunchEffectComposable()
+            listAllCompose()
         }
     }
 }
+@Preview
+@Composable
+fun listAllCompose(){
+    Column {
+        ListComposable()
+        Spacer(modifier = Modifier.fillMaxHeight(.2f) )
+        LaunchEffectComposable()
+        Spacer(modifier = Modifier.fillMaxHeight(.2f) )
+        Countclick()
+    }
+}
+
 
 fun fetchArrayItems(): List<String> {
     return listOf("One", "Two", "Three", "Four", "Five")
@@ -57,7 +72,6 @@ fun Countclick(){
     var count = remember {
         mutableStateOf(0)
     }
-
     var key = count.value%3 == 0
     LaunchedEffect(key1 = key){
         Log.e(Constant.TAG, "Countclick: ${count.value} " )
@@ -87,7 +101,7 @@ fun LaunchEffectComposable(){
         }
     }
 
-    var text = "Counter runnic on value ${count.value}"
+    var text = "Counter running on value ${count.value}"
     if(count.value == 0){
         Log.e(Constant.TAG, "LaunchEffectComposable: Counter is stopped")
     }

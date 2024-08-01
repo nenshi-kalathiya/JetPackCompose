@@ -13,7 +13,7 @@
         android:theme="@style/Theme.DemoJetPack"
         tools:targetApi="31">
         <activity
-            android:name=".GComposableSideEffectHandlers"
+            android:name=".SideEffectHandler.MDerivedState"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.DemoJetPack">
@@ -39,10 +39,28 @@
             android:name=".ERecomposition"
             android:exported="false" />
         <activity
-            android:name=".FCustomizeTheme"
+            android:name=".demoapp.DemoMainScreen"
             android:exported="false" />
         <activity
-            android:name=".demoapp.DemoMainScreen"
+            android:name=".FStateObject"
+            android:exported="false" />
+        <activity
+            android:name=".GCustomizeTheme"
+            android:exported="false" />
+        <activity
+            android:name=".SideEffectHandler.HComposableSideEffectHandlers"
+            android:exported="false" />
+        <activity
+            android:name=".SideEffectHandler.IRememberCoroutineScope"
+            android:exported="false" />
+        <activity
+            android:name=".SideEffectHandler.JRememberUpdateState"
+            android:exported="false" />
+        <activity
+            android:name=".SideEffectHandler.KDisposableCleaners"
+            android:exported="false" />
+        <activity
+            android:name=".SideEffectHandler.LProduceState"
             android:exported="false" />
     </application>
 

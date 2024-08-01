@@ -12,12 +12,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -42,15 +40,22 @@ class DSingleListProfileItem : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFBFE)
+@Preview(showBackground = true, backgroundColor = 0xFFFFFBFE, heightDp = 500)
 @Composable
-fun ViewProfileItem() {
-    //static by reusing component
-//    Column(modifier = Modifier.verticalScroll(rememberScrollState())){
-//        getProfileList().map { item ->
-//            ProfileItem(image = item.image, title = item.title, description = item.description)
-//        }
-//    }
+private fun ViewProfileItem() {
+    //static view display items & manage scrollbar for further item load
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+    ) {
+        getProfileList().map { item ->
+            ProfileVerticaleItem(
+                image = item.image,
+                title = item.title,
+                description = item.description
+            )
+        }
+    }
     LazyListVerticalItem()
 }
 
@@ -59,7 +64,11 @@ private fun LazyListVerticalItem() {
     //Vertical  recyclerview
 //    LazyColumn(content = {
 //        items(getProfileList()) { item ->
-//            ProfileItem(image = item.image, title = item.title, description = item.description)
+//            ProfileVerticaleItem(
+//                image = item.image,
+//                title = item.title,
+//                description = item.description
+//            )
 //        }
 //    })
 
@@ -73,7 +82,7 @@ private fun LazyListVerticalItem() {
 //            )
 //        }
 //    })
-    
+
     //Grid vertical
 //    LazyVerticalGrid(columns = GridCells.Fixed(3) , content = {
 //        items(getProfileList()) { item ->
@@ -84,23 +93,24 @@ private fun LazyListVerticalItem() {
 //    } )
 
     //Grid Horizontal
-    LazyHorizontalGrid(rows = GridCells.Fixed(3) , content = {
-        items(getProfileList()) { item ->
-            ProfileGrid(
-                image = item.image
-            )
-        }
-    } )
+//    LazyHorizontalGrid(rows = GridCells.Fixed(3) , content = {
+//        items(getProfileList()) { item ->
+//            ProfileGrid(
+//                image = item.image
+//            )
+//        }
+//    } )
 
 
 }
 
 @Composable
-fun ProfileItem(image: Int, title: String, description: String) {
+fun ProfileVerticaleItem(image: Int, title: String, description: String) {
     Card(
         shape = RoundedCornerShape(5.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         modifier = Modifier
+
             .padding(8.dp)
             .background(colorResource(id = R.color.white))
     ) {
@@ -141,11 +151,13 @@ fun ProfileHorizontalItem(image: Int, title: String, description: String) {
             .background(colorResource(id = R.color.white))
             .size(150.dp, 200.dp)
     ) {
-        Column(modifier = Modifier
-            .padding(5.dp)
-            .background(colorResource(id = R.color.white)),
+        Column(
+            modifier = Modifier
+                .padding(5.dp)
+                .background(colorResource(id = R.color.white)),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
+            verticalArrangement = Arrangement.Center
+        ) {
             Image(
                 painter = painterResource(
                     id = image
@@ -191,14 +203,14 @@ fun SetTitleAndDec(modifier: Modifier, title: String, description: String) {
 }
 
 @Composable
-fun ProfileGrid(image: Int){
+fun ProfileGrid(image: Int) {
     Card(
         shape = RoundedCornerShape(5.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         modifier = Modifier
             .padding(8.dp)
             .background(colorResource(id = R.color.white))
-            .size(150.dp, 150.dp)
+            .size(50.dp, 50.dp)
     ) {
         Image(
             painter = painterResource(
@@ -208,9 +220,9 @@ fun ProfileGrid(image: Int){
             modifier = Modifier
                 .fillMaxSize()
                 .background(colorResource(id = R.color.white))
-//                .size(50.dp)
-//                .clip(CircleShape)
-//                .border(2.dp, color = colorResource(id = R.color.black), shape = CircleShape)
+                .size(50.dp)
+                .clip(CircleShape)
+                .border(2.dp, color = colorResource(id = R.color.black), shape = CircleShape)
         )
     }
 }

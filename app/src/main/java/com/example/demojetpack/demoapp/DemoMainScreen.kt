@@ -1,7 +1,6 @@
 package com.example.demojetpack.demoapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
@@ -11,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.demojetpack.Constant.Companion.TAG
 import com.example.demojetpack.demoapp.objects.QuoteDataManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,31 +25,32 @@ class DemoMainScreen : ComponentActivity() {
             QuoteDataManager.loadQuotesFromAssetFile(applicationContext)
         }
         setContent {
-            callApp()
+            callInitialAppPages()
         }
     }
 }
 
-enum class Pages{
+enum class Pages {
     LIST,
     DETAIL
 }
+
 @Preview
 @Composable
-fun callApp() {
-    if (QuoteDataManager.dataLoad.value) {
-        if(QuoteDataManager.currentPage.value == Pages.LIST) {
+fun callInitialAppPages() {
+    if (QuoteDataManager.quotesLoaded.value) {
+        if (QuoteDataManager.currentPage.value == Pages.LIST) {
             QuoteListScreen(QuoteDataManager.quotes) {
                 QuoteDataManager.switchPages(it)
             }
-            }else {
-            QuoteDataManager.currentQuote?.let { DisplayItemQuotes(quote = it) }
-
+        } else {
+            QuoteDataManager.currentQuote?.let { DisplayQuotesDetails(quote = it) }
         }
-
-    }else{
-        Box(contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize(1f)){
+    } else {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize(1f)
+        ) {
             Text(text = " Loading ......")
         }
     }

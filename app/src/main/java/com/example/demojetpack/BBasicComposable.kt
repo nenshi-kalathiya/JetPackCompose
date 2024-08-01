@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.demojetpack
 
 import android.os.Bundle
@@ -37,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.material3.Text as Text1
 
 class BBasicComposable : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +55,14 @@ class BBasicComposable : ComponentActivity() {
 
 @Composable
 fun SetBasicUIComponent(title: String) {
-    Row(horizontalArrangement = Arrangement.Center,
+    //set composable view in one by one row
+    Row(horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .size(500.dp)
-            .shadow(5.dp)
+            .size(400.dp)
+            .shadow(8.dp)
     
     ) {
-
         Image(
             painter = painterResource(id = R.drawable.ic_profile),
             contentDescription = "Call Icon",
@@ -67,29 +70,38 @@ fun SetBasicUIComponent(title: String) {
             colorFilter = ColorFilter.tint(colorResource(id = R.color.details_gray)),
             contentScale = ContentScale.Crop
         )
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
+        //set composable view in one by one column
+        Column(
+            horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Bottom,
             modifier = Modifier.padding(15.dp)) {
-            Text(
+            Text1(
                 modifier = Modifier.padding(5.dp),
                 text = title,
                 fontStyle = FontStyle.Normal,
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 12.sp,
-                color = colorResource(id = R.color.parpal),
+                fontSize = 15.sp,
+                color = colorResource(id = R.color.pink),
                 letterSpacing = TextUnit.Unspecified,
                 softWrap = true,
                 maxLines = 2,
                 overflow = TextOverflow.Clip
             )
+            TextField(
+                value = "Enter UserName",
+                onValueChange = {},
+                label = { Text(text = "Title") }
+            )
 
+            //function for  remember text edited in edittext
+            TextInput()
             Button(
                 onClick = { },
                 colors = ButtonDefaults.buttonColors(
                     contentColor = colorResource(id = R.color.white),
                     containerColor = colorResource(id = R.color.pink),
                     disabledContainerColor = colorResource(id = R.color.black),
-                    disabledContentColor = colorResource(id = R.color.parpal)
+                    disabledContentColor = colorResource(id = R.color.purpal)
                 ),
                 //button should enable or disable
                 enabled = true,
@@ -111,21 +123,20 @@ fun SetBasicUIComponent(title: String) {
                         .size(20.dp)
                         .padding(5.dp)
                 )
-                Text(text = "Test ")
-                Text(text = "Best")
+                Text1(text = "Test ")
+                Text1(text = "Best")
             }
-            TextInput()
-
+            //set composable views override one upon second
             Box (contentAlignment = Alignment.Center){
                 Image(
-                    painter = painterResource(id = R.drawable.ic_food),
+                    painter = painterResource(id = R.drawable.ic_eating),
                     contentDescription = "test",
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(250.dp)
                         .padding(5.dp)
                 )
                 Image(
-                    painter = painterResource(id = R.drawable.ic_profile),
+                    painter = painterResource(id = R.drawable.ic_food),
                     contentDescription = "test",
                     modifier = Modifier
                         .size(90.dp)
@@ -145,7 +156,7 @@ fun TextInput() {
         onValueChange = {
             editedText.value = it
         },
-        label = { Text(text = "Title") },
+        label = { Text1(text = "Title") },
         enabled = true,
         readOnly = false
     )

@@ -12,31 +12,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.demojetpack.R
 import com.example.demojetpack.demoapp.model.Quote
 
 @Composable
-fun QuoteListScreen(quoteList : Array<Quote>, onClick:(quote: Quote) -> Unit){
+fun QuoteListScreen(quoteList: Array<Quote>, onClick: (quote: Quote) -> Unit) {
     Column() {
-        Text(text = stringResource(id = R.string.app_name),
-        textAlign = TextAlign.Center,
-        modifier = Modifier.padding(15.dp, 20.dp)
-            .align(Alignment.CenterHorizontally),
-        style = MaterialTheme.typography.headlineMedium)
-        QuoteList(quoteList =quoteList, onClick )
+        Text(
+            text = stringResource(id = R.string.quotes_app),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(15.dp, 20.dp)
+                .align(Alignment.CenterHorizontally),
+            style = MaterialTheme.typography.headlineMedium
+        )
+        QuoteList(quoteList = quoteList, onClick)
     }
 }
-@Composable
-fun QuoteList(quoteList : Array<Quote>, onClick:(quote: Quote) -> Unit){
-    LazyColumn(content = {
-        items(quoteList){
-            SingleItemQuotes(quote = it, onClick)
-// use like lambda function called
-//            {
-//                onClick()
-//            }
-        }
 
+@Composable
+fun QuoteList(quoteList: Array<Quote>, onClick: (quote: Quote) -> Unit) {
+    LazyColumn(content = {
+        items(quoteList) { quote ->
+            SingleItemQuotes(quote = quote) {
+                onClick(quote)
+            }
+        }
     })
 }
